@@ -28,7 +28,7 @@ jobs:
         run: |
           docker buildx create --name builder 
           docker buildx inspect --bootstrap builder
-          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f centos/Dockerfile.centos.7 -t jnix85/centos:7 .
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f centos/Dockerfile.centos.7 -t jnix85/centos:7 .
   build_centos_stream8:
     runs-on: ubuntu-20.04
     steps:
@@ -51,5 +51,5 @@ jobs:
         run: |
           docker buildx create --name builder 
           docker buildx inspect --bootstrap builder
-          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f centos/Dockerfile.centos.stream8 -t jnix85/centos:stream8 .
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f centos/Dockerfile.centos.stream8 -t jnix85/centos:stream8 .
 

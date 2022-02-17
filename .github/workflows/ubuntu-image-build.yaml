@@ -28,7 +28,7 @@ jobs:
         run: |
           docker buildx create --name builder 
           docker buildx inspect --bootstrap builder
-          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f ubuntu/Dockerfile.ubuntu.focal -t jnix85/ubuntu:focal .
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f ubuntu/Dockerfile.ubuntu.focal -t jnix85/ubuntu:focal .
   build_ubuntu_impish:
     runs-on: ubuntu-20.04
     steps:
@@ -51,4 +51,4 @@ jobs:
         run: |
           docker buildx create --name builder 
           docker buildx inspect --bootstrap builder
-          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f ubuntu/Dockerfile.ubuntu.impish -t jnix85/ubuntu:impish .
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f ubuntu/Dockerfile.ubuntu.impish -t jnix85/ubuntu:impish .
