@@ -13,7 +13,7 @@ jobs:
       - name: Prepare Build OS
         run: |
           sudo apt update -qq
-          sudo apt install -qqy qemu-user-static
+          sudo apt install -qq -y qemu-user-static
       - name: Install Docker BuildX Plugin
         run: |
           mkdir ${HOME}/.docker/cli-plugins
@@ -36,7 +36,7 @@ jobs:
       - name: Prepare Build OS
         run: |
           sudo apt update -qq
-          sudo apt install -qqy qemu-user-static
+          sudo apt install -qq -y qemu-user-static
       - name: Install Docker BuildX Plugin
         run: |
           mkdir ${HOME}/.docker/cli-plugins
