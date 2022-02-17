@@ -1,6 +1,6 @@
 FROM ubuntu:20.04
 
-RUN apt-get update && \
-    apt-get upgrade -qy && \
-    apt-get install -qy curl wget && \
-    apt-get clean -q
+RUN apt-get -qy update && \
+    apt-get -qy upgrade && \
+    apt-get -qy install curl wget && \
+    apt-get -qy clean 
