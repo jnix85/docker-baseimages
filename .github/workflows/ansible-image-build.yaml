@@ -1,4 +1,4 @@
-name: centos-image-build
+name: ansible-image-build
 
 on:
   schedule:
