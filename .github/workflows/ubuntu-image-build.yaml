@@ -51,4 +51,4 @@ jobs:
         run: |
           docker buildx create --name builder 
           docker buildx inspect --bootstrap builder
-          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f Dockerfile.ubuntu.impish -t jnix85/ubuntu:impish .
+          docker buildx build --push --platform 'linux/amd64,linux/arm64' --builder builder -f ubuntu/Dockerfile.ubuntu.impish -t jnix85/ubuntu:impish .
