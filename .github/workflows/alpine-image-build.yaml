@@ -1,0 +1,100 @@
+name: alpine-image-build
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"   
+  workflow_dispatch:
+
+jobs:
+  build_alpine_3-12:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Build OS
+        run: |
+          sudo apt update -qq
+          sudo apt install -qq -y qemu-user-static
+      - name: Install Docker BuildX Plugin
+        run: |
+          mkdir ${HOME}/.docker/cli-plugins
+          wget https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64 -O ${HOME}/.docker/cli-plugins/buildx
+          chmod +x ${HOME}/.docker/cli-plugins/buildx
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container Images
+        run: |
+          docker buildx create --name builder 
+          docker buildx inspect --bootstrap builder
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f alpine/Dockerfile.alpine-3.12 -t jnix85/alpine:3.12 .
+  build_alpine_3-13:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Build OS
+        run: |
+          sudo apt update -qq
+          sudo apt install -qq -y qemu-user-static
+      - name: Install Docker BuildX Plugin
+        run: |
+          mkdir ${HOME}/.docker/cli-plugins
+          wget https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64 -O ${HOME}/.docker/cli-plugins/buildx
+          chmod +x ${HOME}/.docker/cli-plugins/buildx
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container Images
+        run: |
+          docker buildx create --name builder 
+          docker buildx inspect --bootstrap builder
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f alpine/Dockerfile.alpine-3.13 -t jnix85/alpine:3.13 .        
+  build_alpine_3-14:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Build OS
+        run: |
+          sudo apt update -qq
+          sudo apt install -qq -y qemu-user-static
+      - name: Install Docker BuildX Plugin
+        run: |
+          mkdir ${HOME}/.docker/cli-plugins
+          wget https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64 -O ${HOME}/.docker/cli-plugins/buildx
+          chmod +x ${HOME}/.docker/cli-plugins/buildx
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container Images
+        run: |
+          docker buildx create --name builder 
+          docker buildx inspect --bootstrap builder
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f alpine/Dockerfile.alpine-3.14 -t jnix85/alpine:3.14 .
+  build_alpine_3-15:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prepare Build OS
+        run: |
+          sudo apt update -qq
+          sudo apt install -qq -y qemu-user-static
+      - name: Install Docker BuildX Plugin
+        run: |
+          mkdir ${HOME}/.docker/cli-plugins
+          wget https://github.com/docker/buildx/releases/download/v0.7.1/buildx-v0.7.1.linux-amd64 -O ${HOME}/.docker/cli-plugins/buildx
+          chmod +x ${HOME}/.docker/cli-plugins/buildx
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build Container Images
+        run: |
+          docker buildx create --name builder 
+          docker buildx inspect --bootstrap builder
+          docker buildx build --squash --push --platform 'linux/amd64,linux/arm64' --builder builder -f alpine/Dockerfile.alpine-3.15 -t jnix85/alpine:3.15 .
