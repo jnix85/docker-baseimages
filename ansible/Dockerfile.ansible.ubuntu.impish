@@ -1,0 +1,15 @@
+FROM    jnix85/ubuntu:impish AS builder
+
+ENV     DEBIAN_FRONTEND=noninteractive
+
+RUN     apt-get update && \
+        apt-get install -y -qq python3-virtualenv && \
+        virtualenv /usr/share/ansible && \
+        . /usr/share/ansible/bin/activate && \
+        pip install -q --upgrade pip && \
+        pip install -q ansible==4.10.0 ansible-lint==4.2.0
+
+FROM    jnix85/ubuntu:impish
+
+COPY    --from=builder /usr/share/ansible /usr/share/ansible
+RUN     for i in ansible-{config,connection,console,doc,galaxy,inventory,lint,playbook,pull,test,vault} ansible cmark; do ln -s /usr/share/ansible/bin/${i} /usr/bin/${i}; done
