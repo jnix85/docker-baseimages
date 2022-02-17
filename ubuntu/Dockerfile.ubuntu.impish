@@ -1,3 +1,6 @@
 FROM ubuntu:21.10
 
-RUN apt-get update -q && apt-get upgrade -qy&& apt-get clean -q
+RUN apt-get update -q && \
+    apt-get upgrade -qy && \
+    apt-get install -qy curl wget && \
+    apt-get clean -q
